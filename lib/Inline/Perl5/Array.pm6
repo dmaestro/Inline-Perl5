@@ -26,10 +26,10 @@ class Inline::Perl5::Array does Iterable does Positional {
         0 <= pos <= $!p5.p5_av_top_index($!av)
     }
     method Array() {
-        my int32 $av_len = $!p5.p5_av_top_index($!av);
+        my int64 $av_len = $!p5.p5_av_top_index($!av);
 
         my $arr = [];
-        loop (my int32 $i = 0; $i <= $av_len; $i = $i + 1) {
+        loop (my int64 $i = 0; $i <= $av_len; $i = $i + 1) {
             $arr.push($!ip5.p5_to_p6($!p5.p5_av_fetch($!av, $i)));
         }
         $arr
@@ -46,7 +46,7 @@ class Inline::Perl5::Array does Iterable does Positional {
     method kv() {
         self.Array.kv
     }
-    method elems() {
+    method elems( --> int64 ) {
         $!p5.p5_av_top_index($!av) + 1
     }
     method Numeric() {

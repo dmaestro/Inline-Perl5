@@ -107,7 +107,7 @@ class Inline::Perl5::Interpreter is repr('CPointer') {
         returns Pointer { ... }
 
     method p5_av_top_index(Pointer) is native($p5helper)
-        returns int32 { ... }
+        returns int64 { ... }
 
     method p5_av_fetch(Pointer, int32) is native($p5helper)
         returns Pointer { ... }

@@ -305,7 +305,7 @@ SV *p5_buf_to_sv(PerlInterpreter *my_perl, STRLEN len, char* value) {
     return newSVpvn_flags(value, len, 0);
 }
 
-I32 p5_av_top_index(PerlInterpreter *my_perl, AV *av) {
+I64 p5_av_top_index(PerlInterpreter *my_perl, AV *av) {
     PERL_SET_CONTEXT(my_perl);
     return av_top_index(av);
 }
