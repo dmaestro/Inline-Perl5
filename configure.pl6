@@ -19,6 +19,7 @@ sub configure() {
     %vars<p5helper> = p5helper().Str;
     %vars<perlopts> = run(<perl -MExtUtils::Embed -e ccopts -e ldopts>, :out).out.lines.join('');
     %vars<perl6> = $*EXECUTABLE;
+    %vars<res_ver> = 'version/libperl';
     mkdir "resources" unless "resources".IO.e;
     mkdir "resources/libraries" unless "resources/libraries".IO.e;
     my $makefile = slurp('Makefile.in');

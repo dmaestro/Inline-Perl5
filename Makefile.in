@@ -2,14 +2,17 @@
 CC = %CC%
 PERL6 = %perl6%
 
-all: %p5helper%
+all: %p5helper% resources/%res_ver%
 clean:
 	rm -f "%p5helper%"
+	rm -f "resources/%res_ver%"
 	find . -name .precomp -prune -exec rm -rf "{}" \;
 manifest:
 	find . -name .git -prune -o -name .gitignore -prune -o -name .prove -prune -o -name .travis.yml -prune -o -name Makefile -prune -o -name bugs -prune -o -type f -print | sort | cut -c 3- > MANIFEST
 %p5helper%: p5helper.c
 	$(CC) -Wall p5helper.c %perlopts% -shared -o "%p5helper%" -fPIC -g
+resources/%res_ver%: %p5helper% build_version.pl6
+	$(PERL6) build_version.pl6 resources/%res_ver%
 test: all
 	prove -e "$(PERL6) -Ilib" t
 install: all
