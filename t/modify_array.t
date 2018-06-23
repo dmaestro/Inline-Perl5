@@ -15,7 +15,7 @@ my &array-creator = EVAL q:to<PERL5>, :lang<Perl5>;
     PERL5
 
 my $array = array-creator(sub (@array) {
-    is(@array.elems, 2, 'Perl5Hash.elems works');
+    is(@array.elems, 2, 'Perl5Array.elems works');
     for @array {
         ok($_);
     }
