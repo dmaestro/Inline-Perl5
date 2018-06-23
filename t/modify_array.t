@@ -58,7 +58,15 @@ $array.splice(2, 0, [3]);
 is($array.splice, [1, 2, 3, 4]);
 is $array, [];
 
-$array.splice: 0, 0, [1, 2, 3, 4];
+my $bug = ?$array;
+if $bug { # compiler bug determining size of empty array
+    $array.push: 1;
+    $array.splice: 1, 0, [2, 3, 4];
+}
+else {
+    $array.splice: 0, 0, [1, 2, 3, 4];
+}
+todo 'Testing with compiler bug' if $bug;
 is $array, [1, 2, 3, 4];
 
 $array.splice: 1, 2, [7];
